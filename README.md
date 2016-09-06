@@ -39,5 +39,5 @@ Additional things
 * Helpers - i cant explain what this file does, its uncomprehendable.
 * Save - uses FullSerializer ( https://github.com/jacobdufault/fullserializer ) to save all entities with Serializeable component.
 * Interpolation - easy way to handle interpolation of transform after the Position component was changed.
-
+* CodeGenerator/ComponentFactory - generates a class that has static component constructors, its not mandatory to use, but its speeds things up a bit.
 See Example scene for detailed example of game setup (pretty bare bones right now, but so is the project).
