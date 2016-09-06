@@ -20,8 +20,10 @@ concepts:
     * iInitializeSystem - will get initialized on creation
     * iMatcherSystem<T,T1,T2,T3> - will track all entities for certain component composition and trigger OnMatchAdded events 
     * iExecuteSystem - will call Execute() method on tick.
+    * 
+    * All these interfaces can be added on same class or just the ones that are necessary.
 * Pool - class that stores components of same type, serves as a cache/tracker whats added/removed etc, allows entities to query for its components
-    All these interfaces can be added on same class or just the ones that are necessary.
+    
 * Matcher - he has to locate components that match criterias. Used by systems under the hood.
 
 Concrete classes:
