@@ -10,6 +10,7 @@ It uses mixed concepts from various places (like Entitas framework) but has seve
 * has to acknowledge Unity specific nature
 * Has to be braindead simple to use
 * Has to be performant as far as generic nature allows
+* Out of the box has mechanism for templating and accessing data for modding/ runtime editing
 
 What currently exists and how it works:
 
