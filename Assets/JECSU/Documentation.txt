@@ -15,7 +15,7 @@ What currently exists and how it works:
 concepts:
 
     Entity - an object that holds some data to identify it and query the system for its components
-    Component - a data block/object that (ideally) should not hold any logic (apart from some initialization and setters/getters) it is used not only to store data but to identify and make object behavior just by its existance, so that Systems can operate on it.
+    Component - a data block/object that (ideally) should not hold any logic (apart from some initialization and setters/getters) it is used not only to store data but to identify and make object behavior just by its existance, so that Systems can operate on it. 
     System - object performing actual work on components/entities, here go all your manager and everything
         iInitializeSystem - will get initialized on creation
         iMatcherSystem - will track all entities for certain component composition and trigger OnMatchAdded events
