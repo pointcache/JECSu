@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using EntitySystem;
-using EntitySystem.Components;
+using JECSU;
+using JECSU.Components;
 using System.Diagnostics;
 using FullSerializer;
 
@@ -18,42 +18,42 @@ public class Game : MonoBehaviour
     //thus allowing us to have empty components that still perform work and allow systems to function, like Serializeable component is empty,
     //but save system uses its existence to determine if the entity must be saved.
     [Serializable]
-    public class Ball : BaseComponent, iComponent
+    public class Ball : BaseComponent, IComponent
     {
         public Vector3 Direction;
         public float ballSize = 1f;
     }
     [Serializable]
-    public class Rocket : BaseComponent, iComponent
+    public class Rocket : BaseComponent, IComponent
     {
         public enum Side { left, right }
         public Side side;
     }
     [Serializable]
-    public class Borders : BaseComponent, iComponent
+    public class Borders : BaseComponent, IComponent
     {
         public float X, Y;
     }
 
     [Serializable]
-    public class GameSettings : BaseComponent, iComponent
+    public class GameSettings : BaseComponent, IComponent
     {
         public float ballSpeed;
     }
     
     
-    public class View : BaseComponent, iComponent
+    public class View : BaseComponent, IComponent
     {
         [fsIgnore]
         public GameObject view;
     }
     [Serializable]
-    public class GameResources : BaseComponent, iComponent
+    public class GameResources : BaseComponent, IComponent
     {
         public GameObject ballPrefab, rocketPrefab;
     }
 
-    public class SomeMessage : BaseComponent, iComponent { }
+    public class SomeMessage : BaseComponent, IComponent { }
 
     void Start()
     {
@@ -101,7 +101,7 @@ public class Game : MonoBehaviour
     /// <summary>
     /// For testing purposes, performance tests etc.
     /// </summary>
-    public class TestSystem : BaseSystem, iInitializeSystem //Initialize system interface indicates that the systems "Initialize" method will be called, and thats it.
+    public class TestSystem : BaseSystem, IInitializeSystem //Initialize system interface indicates that the systems "Initialize" method will be called, and thats it.
     {
         public void Initialize()
         {
@@ -133,6 +133,11 @@ public class Game : MonoBehaviour
                 //free component are questionable decision, very questionable
                 //the idea is to have a free floating component that acts as a "message" only to it can be captured by observing systems,
                 //however i think its better to have a separate satellite messaging system
+                //upd: it came to use after thinking that no, it wont really be better, its better to optimize the entity system so that entity can 
+                //be lighting fast so that its feasible to spam them as messages and observe them as part of the pool and save them and change them 
+                //dynamically even if they dont represent any particular object, but just an event 
+
+                //so the conclusion is that we really need to optimize entity/component creation speed
             }
             UnityEngine.Debug.Log(st.ElapsedMilliseconds);
             st.Stop();
@@ -142,7 +147,7 @@ public class Game : MonoBehaviour
     /// <summary>
     /// Controls the pong ball.
     /// </summary>
-    public class BallController : BaseSystem, iExecuteSystem, iInitializeSystem //Execute system will execute each system tick (Time.fixedTimeStep)
+    public class BallController : BaseSystem, IExecuteSystem, IInitializeSystem //Execute system will execute each system tick (Time.fixedTimeStep)
     {
         GameSettings settings;
         Borders borders;
@@ -188,7 +193,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    public class PositionUpdater : BaseSystem, iInitializeSystem
+    public class PositionUpdater : BaseSystem, IInitializeSystem
     {
         public void Initialize()
         {
@@ -212,7 +217,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    public class ViewController : BaseSystem, iMatcherSystem<View> //Matcher system will search for matching types and call OnMatch added/removed 
+    public class ViewController : BaseSystem, IMatcherSystem<View> //Matcher system will search for matching types and call OnMatch added/removed 
     {
         public void OnMatchAdded(Entity ent, Type t)
         {
