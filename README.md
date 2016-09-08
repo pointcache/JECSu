@@ -3,8 +3,8 @@
 # JECSu
 Just another ECS for Unity
 
-This is prototype ECS i made as exercise and attempt to grasp better Entity systems concepts.
-It uses mixed concepts from various places (like Entitas framework) but i made several decisions.
+This prototype ECS was made as exercise and attempt to better grasp  Entity systems.
+It uses mixed concepts from various places (like Entitas framework) but has several decisions:
 
 * no code generation required for it to function.
 * has to acknowledge Unity specific nature
