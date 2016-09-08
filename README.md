@@ -1,4 +1,5 @@
 ![Tested on Unity 5.4.0f3](https://img.shields.io/badge/Tested%20on%20unity-5.4.0f3-blue.svg?style=flat-square)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![License MIT](https://img.shields.io/badge/license-MIT-green.svg)
 # JECSu
 Just another ECS for Unity
 
