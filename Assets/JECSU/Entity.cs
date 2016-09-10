@@ -2,16 +2,23 @@
 {
     using System;
     using System.Collections.Generic;
-
+    using JECSU.Serialization;
     /// <summary>
     /// Represents entity abstraction as an object
     /// </summary>
     [Serializable]
     public class Entity
     {
-
+        /// <summary>
+        /// Unique database name
+        /// </summary>
+        public string databaseID { get; set; }
+        /// <summary>
+        /// Simply a name doesnt act as id 
+        /// </summary>
         public string name { get; set; }
-        //this id is set to entities by entity manager, its unique
+        //this id is set to entities by entity manager, its unique, runtime parameter for query
+        [TemplateIgnore]
         public int id { get; private set; }
         /// <summary>
         /// Use this to create entities

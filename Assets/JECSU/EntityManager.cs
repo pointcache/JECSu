@@ -8,6 +8,8 @@ namespace JECSU
     using UnityEngine;
     using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
 
     public class EntityManager : MonoBehaviour
     {
@@ -27,6 +29,18 @@ namespace JECSU
         /// Last used id for a new entity.
         /// </summary>
         static int currentId = 0;
+
+        static ITemplateDatabase templateDatabase;
+
+        public static void RegisterDatabase(ITemplateDatabase database, string configDir)
+        {
+            templateDatabase = database;
+
+            var files = Directory.GetFiles(configDir);
+            var configFile = files.FirstOrDefault(x => x == "templateDB.cfg");
+
+           //templateDatabase.Initialize(config);
+        }
 
         void FixedUpdate()
         {
