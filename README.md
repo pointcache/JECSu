@@ -3,6 +3,34 @@
 # JECSu
 Just another ECS for Unity
 
+#What is ECS and what are the use cases:
+
+ECS stands for Entity-Component-System, they are 3 separate concepts, not like this is a "system" that just has entities and components, instead it is a framework that has 
+- Entities
+- Components
+- Systems
+
+These 3 concepts allow for a very special way to decouple data from implementation, in a way mvc and other oop concepts
+can't. ECS is one of the most sophisticated architectures in software developed finding it's use in many mmos and big games.
+In ECS all the data is represented as components on entities, where entity is empty object that doesnt perform any actions.
+So all inheritance problems with class hierarchy are solved by Composition. https://en.wikipedia.org/wiki/Composition_over_inheritance
+This causes fundamental shift in thinking process and simplifies writing manageable code.
+
+So when components are data, and entities are compositions of components, systems represent concrete implementation.
+Systems may iterate over component types, and perform work on them based on their current state, they may query for
+specific component arrangement, and do pretty much the same you would expect from encapsulated work object.
+
+The real benefit comes when you realize that all the data in the game is represented by a flat list of entities and separate lists of components of the same type, that are static and by themselves don't perform any job, they become alive only when the system modifies them. It's a heart of a data driven approach, where the logic has a bird eye view on a sea of data.
+
+There are many resources you could read about ECS and data driven approach:
+http://scottbilas.com/files/2002/gdc_san_jose/game_objects_slides.pdf
+http://cowboyprogramming.com/2007/01/05/evolve-your-heirachy/
+
+This particular ECS is being designed with several use cases in mind:
+* Large scale games, with dynamic loading of assets
+* Dynamic non stop simulation outside of scene, scalability of simulation
+* Procedural games with heavy emphasis on modding and editing performed outside of Unity editor
+
 This prototype ECS was made as exercise and attempt to better grasp  Entity systems.
 It uses mixed concepts from various places (like Entitas framework) but has several decisions:
 
