@@ -1,0 +1,9 @@
+9mm "Parrabellum" bullet
+	[Bullet]
+		type = pistol
+	[Resources]
+		prefabID = bullets/ninemm
+		iconID = icons/ninemm
+		
+bullet 
+	[Position]

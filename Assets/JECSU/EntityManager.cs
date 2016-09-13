@@ -4,15 +4,13 @@
 /// </summary>
 namespace JECSU
 {
-
     using UnityEngine;
     using System;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
 
     public class EntityManager : MonoBehaviour
     {
+        public bool initDatabase;
         //All our entities
         static List<Entity> _entities = new List<Entity>(10000);
         //Cached entities by entity id
@@ -30,16 +28,15 @@ namespace JECSU
         /// </summary>
         static int currentId = 0;
 
-        static ITemplateDatabase templateDatabase;
+        public static TemplateDatabase database;
 
-        public static void RegisterDatabase(ITemplateDatabase database, string configDir)
+        void Awake()
         {
-            templateDatabase = database;
-
-            var files = Directory.GetFiles(configDir);
-            var configFile = files.FirstOrDefault(x => x == "templateDB.cfg");
-
-           //templateDatabase.Initialize(config);
+            if (initDatabase)
+            {
+                database = new TemplateDatabase();
+                database.Initialize();
+            }
         }
 
         void FixedUpdate()

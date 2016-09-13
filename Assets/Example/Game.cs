@@ -41,6 +41,12 @@ public class Game : MonoBehaviour
         public float ballSpeed;
     }
     
+    [Serializable]
+    public class Resources : BaseComponent, IComponent
+    {
+        public string prefabID;
+        public string iconID;
+    }
     
     public class View : BaseComponent, IComponent
     {

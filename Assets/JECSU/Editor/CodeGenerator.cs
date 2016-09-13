@@ -37,9 +37,19 @@
 
                     sw.WriteLine("namespace JECSU");
                     sw.WriteLine("{");
+                    sw.WriteLine("using System;");
+
                     sw.WriteLine("\tpublic static class ComponentFactory");
                     sw.WriteLine("\t{");
+
                     sw.WriteLine("\t\tpublic static IComponent MakeNew<T>() where T : BaseComponent");
+                    sw.WriteLine("\t\t{");
+                    sw.WriteLine("\t\t\tType t = typeof(T);");
+                    sw.WriteLine("\t\t\treturn MakeNew(t);");
+                    sw.WriteLine("\t\t}");
+                    
+
+                    sw.WriteLine("\t\tpublic static IComponent MakeNew(Type t)");
                     sw.WriteLine("\t\t{");
                     sw.WriteLine("\t\t return null;");
                     sw.WriteLine("\t\t}");
@@ -82,9 +92,16 @@
                     sw.WriteLine("\tpublic static class ComponentFactory");
                     sw.WriteLine("\t{");
                     sw.WriteLine("\t\tstatic int lookup;");
+
                     sw.WriteLine("\t\tpublic static IComponent MakeNew<T>() where T : BaseComponent");
                     sw.WriteLine("\t\t{");
                     sw.WriteLine("\t\t\tType t = typeof(T);");
+                    sw.WriteLine("\t\t\treturn MakeNew(t);");
+                    sw.WriteLine("\t\t}");
+
+
+                    sw.WriteLine("\t\tpublic static IComponent MakeNew(Type t)");
+                    sw.WriteLine("\t\t{");
                     sw.WriteLine("\t\t\tif (!@switch.ContainsKey(t))return null;");
                     sw.WriteLine("\t\t\t@switch[t].Invoke();");
                     sw.WriteLine("\t\t\tswitch (lookup)");
@@ -167,7 +184,7 @@
            
             //First we try to find already existing .cs file project wide, and if we dont find it, we create a new one.
             string path = "";
-            List<string> files = Directory.GetFiles(Application.dataPath + "/EntitySystem/", "*.cs", SearchOption.AllDirectories).ToList();
+            List<string> files = Directory.GetFiles(Application.dataPath + "/JECSU/", "*.cs", SearchOption.AllDirectories).ToList();
             foreach (string st in files)
             {
                 if (st.Contains(filename))

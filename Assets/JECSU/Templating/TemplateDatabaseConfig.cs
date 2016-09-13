@@ -1,8 +1,14 @@
-﻿using UnityEngine;
-using System;
-using System.Collections.Generic;
+﻿namespace JECSU.Serialization
+{
 
-public class TemplateDatabaseConfig  {
+    using System;
 
-    public string rootPath;
+    /// <summary>
+    /// This class represents the config of the database itself and is loaded from disc in root folder of the project in Database.xml
+    /// </summary>
+    [Serializable]
+    public class TemplateDatabaseConfig
+    {
+        public string rootPath = "default";
+    }
 }

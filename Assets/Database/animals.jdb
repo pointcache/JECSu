@@ -1,0 +1,32 @@
+chicken "Chicken One" 
+	[Position]
+	[Creature]
+		max_hp = 90000
+		attack_dmg = 1
+		attack = meelee
+		range = 1
+		speed = 1
+		run_speed = 3
+//this is comment
+
+				//comment too	
+	[Behavior]
+		ai = animal/chicken
+	[ColorComponent]
+		color = #ffffff
+	[Resources]
+		prefabID = animals/chicken
+		iconID = animals/chicken
+		somedata = "asdasdas  a sdasd asda "
+		
+chicken_brown "Brown Chicken" chicken
+	[ColorComponent]
+		color = #ffffff
+	[Resources]
+		prefabID = "animals/chicken"
+		iconID = animals/chicken_brown
+
+feather "Feather" 
+	[Position]
+	[Item]
+		mass = 0.01
