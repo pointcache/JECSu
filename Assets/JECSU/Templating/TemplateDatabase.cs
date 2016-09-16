@@ -5,7 +5,7 @@
     using System.IO;
     using System.Xml;
     using System.Text;
-    using JECSU.Serialization;
+    using Serialization;
     using System.Collections.Generic;
 
     /// <summary>
@@ -15,9 +15,11 @@
 
         TemplateDatabaseConfig cfg;
         TemplateDatabaseParser parser;
+        EntityConstructor contructor;
 
         //key = templateID
         Dictionary<string, EntityTemplate> alltemplates = new Dictionary<string, EntityTemplate>();
+
 
         
         public void Initialize()
@@ -42,6 +44,19 @@
                 {
                     alltemplates.Add(templatesFromParser[i].databaseID, templatesFromParser[i]);
                 }
+            }
+
+            contructor = new EntityConstructor();
+            contructor.Initialize();
+        }
+
+        public Entity GetById(string databaseID)
+        {
+            if (!alltemplates.ContainsKey(databaseID))
+                return null;
+            else
+            {
+                return contructor.constructEntityFromTemplate(alltemplates[databaseID]);
             }
         }
 

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using JECSU.Components;
+    using Components;
 
     /// <summary>
     /// This stores deserialized data for later use by Entity Constructor

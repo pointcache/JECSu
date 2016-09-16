@@ -9,6 +9,10 @@
     {
 
         public Vector3 position;
+        public int tempint;
+        public float tempfloat;
+        public Vector2 tempvec2;
+        public long templong;
 
     }
 }

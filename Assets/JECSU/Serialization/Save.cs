@@ -3,7 +3,7 @@ namespace JECSU.Serialization
 {
     using UnityEngine;
     using System.Collections.Generic;
-    using JECSU.Components;
+    using Components;
     using FullSerializer;
     using System.IO;
 

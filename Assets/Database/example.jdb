@@ -1,0 +1,11 @@
+example_entity_id "Example Name"
+	[someComponent]
+	[anotherComponent]
+		someField = "some string"
+		//some comment
+		someProperty = 9.22 
+	[yetAnotherComponent]
+		Size = 1
+		Speed = 1
+		
+		

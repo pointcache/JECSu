@@ -6,17 +6,11 @@ This class speeds up component creation in a safe manner.
 namespace JECSU
 {
 using System;
-	public static class ComponentFactory
+using System.Collections.Generic;
+	public partial class EntityConstructor
 	{
-		public static IComponent MakeNew<T>() where T : BaseComponent
+		public static void AssignFromTemplate(IComponent component, Dictionary<string, string> values)
 		{
-			Type t = typeof(T);
-			return MakeNew(t);
-		}
-		public static IComponent MakeNew(Type t)
-		{
-		 return null;
 		}
 	}
 }
-//EOF

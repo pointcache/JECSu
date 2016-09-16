@@ -16,8 +16,7 @@
 
         public string directory { get; private set; }
         const string  fileformat = "*.jdb";
-        //array of names of existing Component types 
-        static string[] componentTypes;
+       
 
         TemplateDatabaseConfig cfg;
 
@@ -27,11 +26,6 @@
 
             if (cfg.rootPath == "default")
                 directory = Application.dataPath + "/Database";
-
-            //pull all existing components
-            componentTypes = FindAllDerivedTypes<BaseComponent>().Select(x => x.Name).ToArray();
-
-            
         }
 
         public List<EntityTemplate>  FullReadDatabase()
@@ -279,17 +273,17 @@
             return true;
         }
 
-        static Dictionary<string,string> parseComponent(DBJobData jobdata, string line, EntityTemplate template)
+        static Dictionary<string, string> parseComponent(DBJobData jobdata, string line, EntityTemplate template)
         {
             string component = "";
             if (line.Contains('[') && line.Contains(']'))
             {
                 int start = line.IndexOf('[');
                 int end = line.IndexOf(']');
-                char[] name = new char[end - start -1];
+                char[] name = new char[end - start - 1];
 
                 int count = 0;
-                for (int i = start + 1 ; i < end   ; i++)
+                for (int i = start + 1; i < end; i++)
                 {
                     name[count] = line[i];
                     count++;
@@ -300,35 +294,25 @@
             {
                 jobdata.error = "Syntax error, check brackets in component declaration declaration";
             }
-            if (!componentExists(component))
+            //if (!componentExists(component))
+            //{
+            //    jobdata.warnings.Add("Component [" + component + "] not found in system, make sure you spelled it right."); 
+            //}
+
+            if (template.components.ContainsKey(component))
             {
-                jobdata.warnings.Add("Component [" + component + "] not found in system, make sure you spelled it right."); 
+                jobdata.error = "Duplicate component found, this is not allowed.";
             }
             else
             {
-                if (template.components.ContainsKey(component))
-                {
-                    jobdata.error = "Duplicate component found, this is not allowed.";
-                }
-                else
-                {
-                    template.components.Add(component, new Dictionary<string, string>());
-                    return template.components[component];
-                }
+                template.components.Add(component, new Dictionary<string, string>());
+                return template.components[component];
             }
+
             return null;
         }
 
-        static bool componentExists(string comname)
-        {
-            int count = componentTypes.Length;
-            for (int i = 0; i < count; i++)
-            {
-                if (comname.Equals(componentTypes[i]))
-                    return true;
-            }
-            return false;
-        }
+        
 
         static EntityTemplate parseTemplateDeclaration(DBJobData jobdata, string line)
         {
@@ -405,21 +389,6 @@
             return template;
         }
 
-        public static List<Type> FindAllDerivedTypes<T>()
-        {
-            return FindAllDerivedTypes<T>(Assembly.GetAssembly(typeof(T)));
-        }
-
-        public static List<Type> FindAllDerivedTypes<T>(Assembly assembly)
-        {
-            var derivedType = typeof(T);
-            return assembly
-                .GetTypes()
-                .Where(t =>
-                    t != derivedType &&
-                    derivedType.IsAssignableFrom(t)
-                    ).ToList();
-
-        }
+       
     }
 }

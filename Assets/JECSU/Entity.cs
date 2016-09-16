@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using JECSU.Serialization;
+    using Serialization;
     /// <summary>
     /// Represents entity abstraction as an object
     /// </summary>
@@ -32,6 +32,11 @@
             ent.name = _name;
             EntityManager.RegisterEntity(ent);
             return ent;
+        }
+
+        public static Entity ByID(string databaseID)
+        {
+            return EntityManager.database.GetById(databaseID);
         }
 
         /// <summary>

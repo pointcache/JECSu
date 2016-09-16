@@ -2,7 +2,7 @@
 {
     using UnityEngine;
     using System;
-    using JECSU.Serialization;
+    
     public class BaseComponent
     { 
         [TemplateIgnore]
