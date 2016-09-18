@@ -7,6 +7,7 @@
     using System.Text;
     using Serialization;
     using System.Collections.Generic;
+    using System;
 
     /// <summary>
     /// This objects represents database of entities that can be constructed later, it doesnt contain actual Entity objects or their component, only their Templates
@@ -19,7 +20,7 @@
 
         //key = templateID
         Dictionary<string, EntityTemplate> alltemplates = new Dictionary<string, EntityTemplate>();
-
+        Dictionary<string, List<IComponent>> constructedEntities = new Dictionary<string, List<IComponent>>();
 
         
         public void Initialize()
@@ -48,6 +49,7 @@
 
             contructor = new EntityConstructor();
             contructor.Initialize();
+            populateEntitiesDictionary();
         }
 
         public Entity GetById(string databaseID)
@@ -87,6 +89,25 @@
             }
 
             return cfg;
+        }
+
+        void populateEntitiesDictionary()
+        {
+            foreach (var pair in alltemplates)
+            {
+                var components = new List<IComponent>();
+                constructedEntities.Add(pair.Key, components);
+                foreach (var comp in pair.Value.components)
+                {
+                    Type type = Type.GetType(comp.Key);
+                    if (type == null)
+                        continue;
+                    IComponent icomp = ComponentFactory.MakeNew(type);
+                    
+                    EntityConstructor.AssignFromTemplate(icomp, comp.Value);
+                    components.Add(icomp);
+                }
+            }
         }
     }
 }

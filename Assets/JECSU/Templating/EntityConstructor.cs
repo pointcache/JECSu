@@ -27,17 +27,20 @@
 
         public Entity constructEntityFromTemplate(EntityTemplate template)
         {
-            Entity ent = new Entity();
+            Entity ent = Entity.New(template.Name);
+            ent.databaseID = template.databaseID;
+
             foreach (var p in template.components)
             {
                 if (components_dict.ContainsKey(p.Key))
                 {
                     IComponent comp = ComponentFactory.MakeNew(components_dict[p.Key]);
                     AssignFromTemplate(comp, p.Value);
-                    Debug.Log("");
+                    comp.owner = ent;
+                    EntityManager.RegisterComponent(comp);
                 }
             }
-
+            
             return ent;
         }
 

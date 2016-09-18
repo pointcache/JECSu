@@ -25,7 +25,7 @@
             cfg = config;
 
             if (cfg.rootPath == "default")
-                directory = Application.dataPath + "/Database";
+                directory = Application.dataPath + "/TemplateDatabase";
         }
 
         public List<EntityTemplate>  FullReadDatabase()

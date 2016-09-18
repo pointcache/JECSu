@@ -1,0 +1,6 @@
+palm01 "Palm" 
+	[PRS]
+	[GameRes]
+		prefabID = palm01
+		
+		

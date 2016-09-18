@@ -5,11 +5,9 @@
     using System.Collections.Generic;
     //adding serializeable allows us to see it in inspector and save the component, using Save system
     [Serializable]
-    public class PRS : BaseComponent, IComponent
+    public class GameRes : BaseComponent, IComponent
     {
-        public Vector3 rotation;
-        public Vector3 scale;
-        public Vector3 position;
+        public string prefabID;
 
     }
 }

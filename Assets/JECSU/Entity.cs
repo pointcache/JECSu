@@ -34,7 +34,12 @@
             return ent;
         }
 
-        public static Entity ByID(string databaseID)
+        /// <summary>
+        /// Creates entity from template using provided ID
+        /// </summary>
+        /// <param name="databaseID"></param>
+        /// <returns></returns>
+        public static Entity FromID(string databaseID)
         {
             return EntityManager.database.GetById(databaseID);
         }
