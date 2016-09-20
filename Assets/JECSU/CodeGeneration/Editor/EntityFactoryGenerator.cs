@@ -223,8 +223,9 @@
                         sw.WriteLine("\t\t\t}");
                     }   
                 }
-
+                
                 sw.WriteLine("\t\t}");
+                sw.WriteLine("\t comp.Dirty();");
                 sw.WriteLine("\t}");
                 sw.WriteLine("");
             }

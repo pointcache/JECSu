@@ -18,13 +18,13 @@
         const string  fileformat = "*.jdb";
        
 
-        TemplateDatabaseConfig cfg;
+        JECSUConfig cfg;
 
-        public void Initialize(TemplateDatabaseConfig config)
+        public void Initialize(JECSUConfig config)
         {
             cfg = config;
 
-            if (cfg.rootPath == "default")
+            if (cfg.templateDatabasePath == "default")
                 directory = Application.dataPath + "/TemplateDatabase";
         }
 

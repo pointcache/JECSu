@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using JECSU;
 using JECSU.Components;
 
-public class TestGameViewSystem : IInitializeSystem, IMatcherSystem<GameView>
+public class TestGameViewSystem : IInitializeSystem, IMatcherSystem<GameView>, IExecuteSystem
 {
     public bool isActive
     {
@@ -14,6 +14,11 @@ public class TestGameViewSystem : IInitializeSystem, IMatcherSystem<GameView>
     public Matcher matcher
     {
         get;set;
+    }
+
+    public void Execute()
+    {
+
     }
 
     public void Initialize()
@@ -30,6 +35,9 @@ public class TestGameViewSystem : IInitializeSystem, IMatcherSystem<GameView>
             var prefab = (GameObject) Resources.Load(res.prefabID);
             var go = GameObject.Instantiate(prefab);
             gameview.view = go.GetComponent<GameViewBehavior>();
+            if (gameview.view == null)
+                gameview.view = go.AddComponent<GameViewBehavior>();
+            gameview.view.Initialize(ent);
         }
     }
 

@@ -14,7 +14,7 @@
     /// </summary>
     public class TemplateDatabase {
 
-        TemplateDatabaseConfig cfg;
+        JECSUConfig cfg;
         TemplateDatabaseParser parser;
         EntityConstructor contructor;
 
@@ -25,13 +25,33 @@
         
         public void Initialize()
         {
-            cfg = getConfig();
+            cfg = JECSUConfig.current;
             parser = new TemplateDatabaseParser();
             parser.Initialize(cfg);
 
+
+            fillDatabase(parser);
+            
+
+            contructor = new EntityConstructor();
+            contructor.Initialize();
+            fillEntitiesDictionary();
+        }
+
+        public Entity GetById(string databaseID)
+        {
+            if (!alltemplates.ContainsKey(databaseID))
+                return null;
+            else
+            {
+                return contructor.constructEntityFromTemplate(alltemplates[databaseID]);
+            }
+        }
+
+        void fillDatabase(TemplateDatabaseParser parser)
+        {
             //Get list of all templates from directory in config
             var templatesFromParser = parser.FullReadDatabase();
-
             //add them to database while checking for duplicates
             int count = templatesFromParser.Count;
             for (int i = 0; i < count; i++)
@@ -46,52 +66,9 @@
                     alltemplates.Add(templatesFromParser[i].databaseID, templatesFromParser[i]);
                 }
             }
-
-            contructor = new EntityConstructor();
-            contructor.Initialize();
-            populateEntitiesDictionary();
         }
 
-        public Entity GetById(string databaseID)
-        {
-            if (!alltemplates.ContainsKey(databaseID))
-                return null;
-            else
-            {
-                return contructor.constructEntityFromTemplate(alltemplates[databaseID]);
-            }
-        }
-
-        /// <summary>
-        /// tries to find alread existing xml config file, if none - creates new one
-        /// </summary>
-        /// <returns></returns>
-        TemplateDatabaseConfig getConfig()
-        {
-            string path = Application.dataPath + "/Database.xml";
-            var serializer = new XmlSerializer(typeof(TemplateDatabaseConfig));
-
-            if (File.Exists(path))
-            {
-                using (var fStream = new FileStream(path, FileMode.Open))
-                    cfg = (TemplateDatabaseConfig)serializer.Deserialize(fStream);
-            }
-
-            else
-            {
-                cfg = new TemplateDatabaseConfig();
-
-                using (XmlTextWriter tw = new XmlTextWriter(path, Encoding.UTF8))
-                {
-                    tw.Formatting = Formatting.Indented;
-                    serializer.Serialize(tw, cfg);
-                }
-            }
-
-            return cfg;
-        }
-
-        void populateEntitiesDictionary()
+        void fillEntitiesDictionary()
         {
             foreach (var pair in alltemplates)
             {

@@ -41,6 +41,12 @@ using System.Collections.Generic;
 		}
 	}
 	static void JECSU_Components_GameView_assignFromTemplate(JECSU.Components.GameView comp, Dictionary<string,string> values) {
+		foreach (var p in values){
+			if(p.Key == "dynamic" ){
+				comp.dynamic = convertBool(p.Value);
+			}
+		}
+	 comp.Dirty();
 	}
 
 	static void JECSU_Components_ColorComponent_assignFromTemplate(JECSU.Components.ColorComponent comp, Dictionary<string,string> values) {
@@ -49,6 +55,7 @@ using System.Collections.Generic;
 				comp.color = convertColor(p.Value);
 			}
 		}
+	 comp.Dirty();
 	}
 
 	static void JECSU_Components_GameRes_assignFromTemplate(JECSU.Components.GameRes comp, Dictionary<string,string> values) {
@@ -57,6 +64,7 @@ using System.Collections.Generic;
 				comp.prefabID = p.Value;
 			}
 		}
+	 comp.Dirty();
 	}
 
 	static void JECSU_Components_PRS_assignFromTemplate(JECSU.Components.PRS comp, Dictionary<string,string> values) {
@@ -71,6 +79,7 @@ using System.Collections.Generic;
 				comp.position = convertV3(p.Value);
 			}
 		}
+	 comp.Dirty();
 	}
 
 	static void JECSU_Components_Serializeable_assignFromTemplate(JECSU.Components.Serializeable comp, Dictionary<string,string> values) {

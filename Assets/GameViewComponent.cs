@@ -6,6 +6,13 @@
 
     public class GameView : BaseComponent, IComponent
     {
+        [TemplateIgnore]
         public GameViewBehavior view;
+
+        /// <summary>
+        /// Will the position be constantly updated?
+        /// </summary>
+        public bool dynamic = false;
+
     }
 }

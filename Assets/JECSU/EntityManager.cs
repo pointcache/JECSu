@@ -10,6 +10,7 @@ namespace JECSU
 
     public class EntityManager : MonoBehaviour
     {
+        public static EntityManager current;
         public bool initDatabase;
         //All our entities
         static List<Entity> _entities = new List<Entity>(10000);
@@ -28,15 +29,19 @@ namespace JECSU
         /// </summary>
         static int currentId = 0;
 
+        public static event Action<Entity> OnEntityRegistered;
+
         public static TemplateDatabase database;
 
         void Awake()
         {
+            current = this;
             if (initDatabase)
             {
                 database = new TemplateDatabase();
                 database.Initialize();
             }
+
         }
 
         void FixedUpdate()
@@ -81,6 +86,9 @@ namespace JECSU
             }
             _entities.Add(ent);
             _entities_by_id.Add(ent.id, ent);
+
+            if (OnEntityRegistered != null)
+                OnEntityRegistered(ent);
         }
 
         /// <summary>
@@ -99,5 +107,7 @@ namespace JECSU
             //Send the component to pool, it will handle pool creation and component storage
             Pool.AddToPool(comp);
         }
+
+
     }
 }

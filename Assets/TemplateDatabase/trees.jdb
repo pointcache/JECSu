@@ -3,4 +3,11 @@ palm01 "Palm"
 	[GameRes]
 		prefabID = palm01
 		
+palm02 "Palm" 
+	[PRS]
+		position = 4,0,4
+	[GameRes]
+		prefabID = palm01
+	[GameView]
+		
 		

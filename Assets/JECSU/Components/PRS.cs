@@ -8,7 +8,7 @@
     public class PRS : BaseComponent, IComponent
     {
         public Vector3 rotation;
-        public Vector3 scale;
+        public Vector3 scale = Vector3.one;
         public Vector3 position;
 
     }
