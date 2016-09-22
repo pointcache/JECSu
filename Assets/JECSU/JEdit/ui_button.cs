@@ -85,6 +85,23 @@
             toggled = !toggled;
             if(OnToggle!=null)
                 OnToggle.Invoke(toggled);
+            if(!toggled)
+                tweenToNormal();
+        }
+
+        public void ToggleOn()
+        {
+            toggled = true;
+            if(OnToggle!=null)
+                OnToggle.Invoke(true);
+        }
+
+        public void ToggleOff()
+        {
+            toggled = false;
+            if(OnToggle!=null)
+                OnToggle.Invoke(false);
+            tweenToNormal();
         }
 
         public void OnPointerClick(PointerEventData eventData)

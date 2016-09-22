@@ -14,7 +14,7 @@
     public class JECSUConfig
     {
         public string templateDatabasePath = "default";
-        public string packageDatabasePath = "default";
+        public string databoxDatabasePath = "default";
 
 
         private static JECSUConfig _current;

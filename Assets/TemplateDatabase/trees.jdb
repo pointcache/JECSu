@@ -9,5 +9,7 @@ palm02 "Palm"
 	[GameRes]
 		prefabID = palm01
 	[GameView]
+	
+	
 		
 		

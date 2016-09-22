@@ -7,7 +7,7 @@ namespace JECSU
     using UnityEngine;
     using System;
     using System.Collections.Generic;
-
+    using Serialization;
     public class EntityManager : MonoBehaviour
     {
         public static EntityManager current;
@@ -32,16 +32,14 @@ namespace JECSU
         public static event Action<Entity> OnEntityRegistered;
 
         public static TemplateDatabase database;
-
+        public static JECSUConfig config;
         void Awake()
         {
             current = this;
             if (initDatabase)
             {
                 database = new TemplateDatabase();
-                database.Initialize();
             }
-
         }
 
         void FixedUpdate()

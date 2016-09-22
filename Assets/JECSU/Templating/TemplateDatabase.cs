@@ -23,7 +23,7 @@
         Dictionary<string, List<IComponent>> constructedEntities = new Dictionary<string, List<IComponent>>();
 
         
-        public void Initialize()
+        public TemplateDatabase() 
         {
             cfg = JECSUConfig.current;
             parser = new TemplateDatabaseParser();

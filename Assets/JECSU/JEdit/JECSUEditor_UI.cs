@@ -13,7 +13,8 @@
         [SerializeField]
         private GameObject
             NewEntityBar,
-            LeftPanel;
+            LeftPanel,
+            RightPanel;
         [SerializeField]
         private RectTransform entityListContent;
         [SerializeField]
@@ -21,7 +22,7 @@
 
         public void SetSelectedName(string name)
         {
-            selectedText.text = name;
+            selectedText.text = " " + name;
         }
 
         void Awake()
@@ -55,6 +56,15 @@
                 LeftPanel.GetComponent<PanelAnimator>().GoEnd();
             else
                 LeftPanel.GetComponent<PanelAnimator>().GoStart();
+
+        }
+
+        public void RightPanelState(bool state)
+        {
+            if (state)
+                RightPanel.GetComponent<PanelAnimator>().GoEnd();
+            else
+                RightPanel.GetComponent<PanelAnimator>().GoStart();
 
         }
     }
