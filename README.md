@@ -13,7 +13,7 @@ ECS stands for Entity-Component-System, they are 3 separate concepts, not like t
 - Systems
 
 These 3 concepts allow for a very special way to decouple data from implementation, in a way mvc and other oop concepts
-can't. ECS is one of the most sophisticated architectures in software developed finding it's use in many mmos and big games.
+can't. ECS is one of the most sophisticated architectures in software development finding it's use in many mmos and big games.
 In ECS all the data is represented as components on entities, where entity is empty object that doesnt perform any actions.
 So all inheritance problems with class hierarchy are solved by Composition. https://en.wikipedia.org/wiki/Composition_over_inheritance
 This causes fundamental shift in thinking process and simplifies writing manageable code.
