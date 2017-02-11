@@ -14,12 +14,12 @@ ECS stands for Entity-Component-System, they are 3 separate concepts, not like t
 
 These 3 concepts allow for a very special way to decouple data from implementation, in a way mvc and other oop concepts
 can't. ECS is one of the most sophisticated architectures in software development finding it's use in many mmos and big games.
-In ECS all the data is represented as components on entities, where entity is empty object that doesnt perform any actions.
-So all inheritance problems with class hierarchy are solved by Composition. https://en.wikipedia.org/wiki/Composition_over_inheritance
+In ECS all the data is represented as components on entities, where entity is empty object(or even less than that- an ID) that doesnt perform any actions.
+All inheritance problems with class hierarchy must be solved by Composition. https://en.wikipedia.org/wiki/Composition_over_inheritance
 This causes fundamental shift in thinking process and simplifies writing manageable code.
 
-So when components are data, and entities are compositions of components, systems represent concrete implementation.
-Systems may iterate over component types, and perform work on them based on their current state, they may query for
+When components are data, and entities are compositions of components, systems represent concrete implementation(business logic).
+Systems may iterate over components, and perform work on them based on their current state, they may query for
 specific component arrangement, and do pretty much the same you would expect from encapsulated work object.
 
 The real benefit comes when you realize that all the data in the game is represented by a flat list of entities and separate lists of components of the same type, that are static and by themselves don't perform any job, they become alive only when the system modifies them. It's a heart of a data driven approach, where the logic has a bird eye view on a sea of data.
