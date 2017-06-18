@@ -3,6 +3,11 @@
 
 ![Logo](http://i.imgur.com/ePW8hGA.png)
 
+**This was my experiment, its superseeded by URSA https://github.com/pointcache/URSA 
+, which i currently use in http://www.produktgame.com/ as a core. JECSU is half baked and can be used as case study,
+but its not even remotely production ready.**
+
+
 Just another ECS for Unity
 
 #What is ECS and what are the use cases:
